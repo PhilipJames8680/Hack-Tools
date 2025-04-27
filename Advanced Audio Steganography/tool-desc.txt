@@ -1,0 +1,1 @@
+A Tool that is used in audio steganography using LSB+1 technique, XOR key using SHA256 + Salt.
