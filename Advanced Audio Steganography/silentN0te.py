@@ -5,27 +5,27 @@ import hashlib
 from typing import Tuple
 
 def text_to_bits(text: str) -> str:
-    """Convert text to binary string representation"""
+    # Convert text to binary string representation
     return ''.join(f"{ord(c):08b}" for c in text)
 
 def bits_to_text(bits: str) -> str:
-    """Convert binary string back to text"""
+    # Convert binary string back to text
     bits = bits[:len(bits)//8*8]
     chars = [chr(int(bits[i:i+8], 2)) for i in range(0, len(bits), 8)]
     return ''.join(chars)
 
 def xor_data(text: str, key: bytes) -> str:
-    """Apply XOR encryption to text with a multi-byte key"""
+    # Apply XOR to text with a key
     key_len = len(key)
     return ''.join(chr(ord(c) ^ key[i % key_len]) for i, c in enumerate(text))
 
 def generate_output_name(input_audio: str) -> str:
-    """Generate output filename by appending 'steg'"""
+    # Generate output filename by appending 'steg'
     name, ext = os.path.splitext(input_audio)
     return f"{name}_steg{ext}"
 
 def calculate_max_capacity(audio_file: str) -> Tuple[int, wave._wave_params]:
-    """Calculate maximum storable bytes and return audio params"""
+    # Calculate maximum storable bytes and return audio parameters
     with wave.open(audio_file, 'rb') as audio:
         params = audio.getparams()
         frames = audio.getnframes()
